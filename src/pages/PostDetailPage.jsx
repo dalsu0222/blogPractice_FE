@@ -4,11 +4,12 @@ import style from "../styles/PostDetailPage.module.css";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { useSelector } from "react-redux";
+import CommentSection from "../components/CommentSection";
 
 export default function PostDetailPage() {
   const { postId } = useParams();
-  const [postInfo, setPostInfo] = useState({});
   const user = useSelector((state) => state.user.user);
+  const [postInfo, setPostInfo] = useState({});
   const username = user?.username;
   const navigate = useNavigate();
   console.log(username);
@@ -74,7 +75,12 @@ export default function PostDetailPage() {
           <h3>{postInfo.title}</h3>
         </div>
         <div className={style.info}>
-          <p>작성자: {postInfo.author}</p>
+          <p>
+            작성자:{" "}
+            <Link to={`/userpage/${postInfo.author}`} className={style.author}>
+              {postInfo.author}
+            </Link>
+          </p>
           <p>작성일: {formatDate(postInfo.createdAt)}</p>
         </div>
         <div className={style.summary}>{postInfo.summary}</div>
@@ -95,7 +101,7 @@ export default function PostDetailPage() {
         <span onClick={() => navigate("/")}>목록으로</span>
       </section>
 
-      <section className={style.commentlist}>댓글목록</section>
+      <CommentSection postId={postId} />
     </section>
   );
 }
