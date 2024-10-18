@@ -19,7 +19,7 @@ export default function UserPage() {
       setError(null);
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/userpage/${userinfo}`
+          `${import.meta.env.VITE_API_URL}/users/${userinfo}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch user data");

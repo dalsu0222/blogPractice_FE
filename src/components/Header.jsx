@@ -17,9 +17,12 @@ export default function Header() {
   };
 
   const fetchProfile = useCallback(async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/auth/profile`,
+      {
+        credentials: "include",
+      }
+    );
     if (response.ok) {
       const userInfo = await response.json();
       dispatch(setUserAllInfo(userInfo));
@@ -31,7 +34,7 @@ export default function Header() {
   }, [fetchProfile, location]); // 의존성 배열의 location : 새로고침시에도 프로필 유지되도록 하기위함
 
   const logout = async () => {
-    fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+    fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
       credentials: "include",
       method: "POST",
     });

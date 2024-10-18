@@ -15,7 +15,7 @@ export default function EditPost() {
   useEffect(() => {
     const getPost = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/postDetail/${postId}`
+        `${import.meta.env.VITE_API_URL}/posts/${postId}`
       );
       const data = await response.json();
       console.log(data);
@@ -34,13 +34,15 @@ export default function EditPost() {
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    if (files?.[0]) {
-      data.set("files", files?.[0]);
+    console.log(files);
+    if (files) {
+      // files[0]에서 files로 변경
+      data.set("files", files);
     }
 
     // 서버와 통신 코드 작성
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/editPost/${postId}`,
+      `${import.meta.env.VITE_API_URL}/posts/${postId}`,
       {
         method: "PUT",
         body: data,

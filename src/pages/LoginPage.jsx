@@ -12,7 +12,7 @@ export default function LoginPage() {
     e.preventDefault();
     console.log(username, password);
     // 서버와 통신 코드 작성
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
         username,

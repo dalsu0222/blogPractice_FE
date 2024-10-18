@@ -18,7 +18,7 @@ export default function PostDetailPage() {
     const fetchPostDetail = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/postDetail/${postId}`
+          `${import.meta.env.VITE_API_URL}/posts/${postId}`
         );
         const data = await response.json();
         console.log(data);
@@ -47,9 +47,10 @@ export default function PostDetailPage() {
   const deletePost = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/deletePost/${postId}`,
+        `${import.meta.env.VITE_API_URL}/posts/${postId}`,
         {
           method: "DELETE",
+          credentials: "include", // 쿠키를 주고받기 위해 필요
         }
       );
       if (response.ok) {

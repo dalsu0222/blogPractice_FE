@@ -18,7 +18,7 @@ export default function EditUserPage() {
     const fetchUserInfo = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/userpage/${userName}`
+          `${import.meta.env.VITE_API_URL}/users/${userName}`
         );
         const data = await response.json();
         if (data.userImage) {
@@ -64,7 +64,7 @@ export default function EditUserPage() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/updataUserInfo/${userName}`,
+        `${import.meta.env.VITE_API_URL}/users/${userName}`,
         {
           method: "PUT",
           body: formData,

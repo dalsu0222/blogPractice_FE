@@ -12,7 +12,7 @@ export default function MainPage() {
 
   const getPostList = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/postList`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/posts`);
       const data = await response.json();
       console.log(data);
       if (response.ok) {

@@ -38,16 +38,19 @@ export default function RegisterPage() {
     }
 
     // 회원가입 정보를 서버로 전송
-    const response = await fetch("http://localhost:8000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // text/paine 일반 텍스트 타입
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // text/paine 일반 텍스트 타입
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      }
+    );
     console.log("-----", response);
 
     // 회원가입 성공시 로그인 페이지로 이동

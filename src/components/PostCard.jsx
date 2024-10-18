@@ -13,7 +13,7 @@ export default function PostCard({ post }) {
   const [likeCount, setLikeCount] = useState(
     post.likes ? post.likes.length : 0
   );
-  console.log("user", user);
+  // console.log("user", user);
 
   const navigate = useNavigate();
   const goDetail = () => {
@@ -31,7 +31,7 @@ export default function PostCard({ post }) {
       day: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
-      timeZone: "utc",
+      timeZone: "Asia/Seoul",
     });
   };
 
@@ -50,7 +50,7 @@ export default function PostCard({ post }) {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/like/${post._id}`,
+        `${import.meta.env.VITE_API_URL}/posts/likes/${post._id}`,
         {
           method: "POST",
           credentials: "include",
@@ -59,6 +59,7 @@ export default function PostCard({ post }) {
 
       if (response.ok) {
         const updatedPost = await response.json();
+        console.log(updatedPost);
         setIsLiked(!isLiked);
         setLikeCount(updatedPost.likes.length);
         // if (onLikeUpdate) onLikeUpdate(updatedPost);
@@ -84,14 +85,14 @@ export default function PostCard({ post }) {
           </Link>
           <time className={style.date}>{formatDate(post.createdAt)}</time>
         </p>
-        <p onClick={handleLikeClick}>
+        <p className={style.__dec}>{post.summary}</p>
+        <p className={style.response} onClick={handleLikeClick}>
           <span className={`${style.heart} ${isLiked ? style.liked : ""}`}>
-            ❤️
+            {isLiked ? "❤️" : "🤍"}
           </span>
-          <span>{likeCount}</span>
+          <span className={style.likeCount}>{likeCount}</span>
         </p>
         <p>댓글 {post.commentCount}개</p>
-        <p className={style.__dec}>{post.summary}</p>
       </div>
       <div className={style.post_img}>
         <img src={`${import.meta.env.VITE_API_URL}/${post.cover}`} alt="" />
